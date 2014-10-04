@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +17,32 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    
+      [Parse setApplicationId:@"xi0iIiyKr5BXAWMydq0JCMkjpAA8n2s4JZI4j2lF" clientKey:@"ZceurMmYeLub89ah8AHd6LhmjtLrDDXJU1bhF3iI"];
+
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+
+    
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if (!currentUser) {
+        // Dummy username and password
+        PFUser *user = [PFUser user];
+        user.username = @"mory";
+        user.password = @"password";
+        user.email = @"mor@mor.com";
+        
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                // Assume the error is because the user already existed.
+                [PFUser logInWithUsername:@"mory" password:@"password"];
+            }
+        }];
+    }
+
+
+
     return YES;
 }
 
