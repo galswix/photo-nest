@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2309C2D819DF422B009FDA92 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2309C2D619DF422B009FDA92 /* Bolts.framework */; };
-		2309C2D919DF422B009FDA92 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2309C2D719DF422B009FDA92 /* Parse.framework */; };
 		2309C2DB19DF4247009FDA92 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2309C2DA19DF4247009FDA92 /* AudioToolbox.framework */; };
 		2309C2DD19DF424E009FDA92 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2309C2DC19DF424E009FDA92 /* CFNetwork.framework */; };
 		2309C2DF19DF4257009FDA92 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2309C2DE19DF4257009FDA92 /* CoreGraphics.framework */; };
@@ -30,6 +29,8 @@
 		2309C34519DF87F8009FDA92 /* UzysGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309C33B19DF87F8009FDA92 /* UzysGroupViewCell.m */; };
 		2309C34619DF87F8009FDA92 /* UzysWrapperPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309C33D19DF87F8009FDA92 /* UzysWrapperPickerController.m */; };
 		2309C34919DF8A60009FDA92 /* CreateAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309C34819DF8A60009FDA92 /* CreateAlbumViewController.m */; };
+		231C1A3919E320D600352CBD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231C1A3819E320D600352CBD /* Parse.framework */; };
+		231C1A3C19E321F500352CBD /* Parser+MultiProgression.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C1A3B19E321F500352CBD /* Parser+MultiProgression.m */; };
 		23AE342C19DF40CF00342EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AE342B19DF40CF00342EFF /* main.m */; };
 		23AE342F19DF40CF00342EFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AE342E19DF40CF00342EFF /* AppDelegate.m */; };
 		23AE343519DF40CF00342EFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23AE343319DF40CF00342EFF /* Main.storyboard */; };
@@ -82,6 +83,9 @@
 		2309C33D19DF87F8009FDA92 /* UzysWrapperPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysWrapperPickerController.m; sourceTree = "<group>"; };
 		2309C34719DF8A60009FDA92 /* CreateAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAlbumViewController.h; sourceTree = "<group>"; };
 		2309C34819DF8A60009FDA92 /* CreateAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAlbumViewController.m; sourceTree = "<group>"; };
+		231C1A3819E320D600352CBD /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../Downloads/parse-library-1.4.1/Parse.framework"; sourceTree = "<group>"; };
+		231C1A3A19E321F500352CBD /* Parser+MultiProgression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parser+MultiProgression.h"; sourceTree = "<group>"; };
+		231C1A3B19E321F500352CBD /* Parser+MultiProgression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parser+MultiProgression.m"; sourceTree = "<group>"; };
 		23AE342619DF40CF00342EFF /* Photo Nest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Nest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23AE342A19DF40CF00342EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23AE342B19DF40CF00342EFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				231C1A3919E320D600352CBD /* Parse.framework in Frameworks */,
 				2309C2ED19DF4296009FDA92 /* SystemConfiguration.framework in Frameworks */,
 				2309C2EB19DF428B009FDA92 /* StoreKit.framework in Frameworks */,
 				2309C2E919DF4283009FDA92 /* Security.framework in Frameworks */,
@@ -110,7 +115,6 @@
 				2309C2DF19DF4257009FDA92 /* CoreGraphics.framework in Frameworks */,
 				2309C2DD19DF424E009FDA92 /* CFNetwork.framework in Frameworks */,
 				2309C2DB19DF4247009FDA92 /* AudioToolbox.framework in Frameworks */,
-				2309C2D919DF422B009FDA92 /* Parse.framework in Frameworks */,
 				2309C2D819DF422B009FDA92 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +152,8 @@
 		2309C2F219DF49D8009FDA92 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				231C1A3A19E321F500352CBD /* Parser+MultiProgression.h */,
+				231C1A3B19E321F500352CBD /* Parser+MultiProgression.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -200,6 +206,7 @@
 		23AE341D19DF40CF00342EFF = {
 			isa = PBXGroup;
 			children = (
+				231C1A3819E320D600352CBD /* Parse.framework */,
 				23AE342819DF40CF00342EFF /* Photo Nest */,
 				23AE344219DF40CF00342EFF /* Photo NestTests */,
 				23AE342719DF40CF00342EFF /* Products */,
@@ -362,6 +369,7 @@
 				2309C34419DF87F8009FDA92 /* UzysGroupPickerView.m in Sources */,
 				2309C34919DF8A60009FDA92 /* CreateAlbumViewController.m in Sources */,
 				2309C34619DF87F8009FDA92 /* UzysWrapperPickerController.m in Sources */,
+				231C1A3C19E321F500352CBD /* Parser+MultiProgression.m in Sources */,
 				2309C34119DF87F8009FDA92 /* UzysAssetsPickerController.m in Sources */,
 				23AE342F19DF40CF00342EFF /* AppDelegate.m in Sources */,
 				2309C33F19DF87F8009FDA92 /* UzysAppearanceConfig.m in Sources */,
@@ -496,6 +504,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Photo",
 					Nest,
+					"/Users/gals/Downloads/parse-library-1.4.1",
 				);
 				INFOPLIST_FILE = "Photo Nest/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -511,6 +520,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Photo",
 					Nest,
+					"/Users/gals/Downloads/parse-library-1.4.1",
 				);
 				INFOPLIST_FILE = "Photo Nest/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -10,6 +10,7 @@
 #import "UzysAssetsPickerController.h"
 #define PHOTOS_PICKER 1
 #define COVER_PICKER 2
+#define MAXIMUM_PHOTOS_IN_ALBUM 30
 
 @interface CreateAlbumViewController () <UzysAssetsPickerControllerDelegate>
 @property (nonatomic, assign) UIBackgroundTaskIdentifier photoPostBackgroundTaskId;
@@ -22,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.photoPostBackgroundTaskId = UIBackgroundTaskInvalid;
+    _uploaded = 0;
+    _totalToUpload = 0;
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -46,7 +49,7 @@
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
     picker.maximumNumberOfSelectionVideo = 0;
-    picker.maximumNumberOfSelectionPhoto = 30;
+    picker.maximumNumberOfSelectionPhoto = MAXIMUM_PHOTOS_IN_ALBUM;
     
     
     [self presentViewController:picker animated:YES completion:nil];
@@ -54,12 +57,19 @@
 }
 
 
-- (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
+- (NSString *)createNewAlbum {
     NSString* albumid = [self generateAlbumId];
+    newAlbum = [PFObject objectWithClassName:@"Album"];
+    [newAlbum setObject:albumid forKey:@"albumId"];
+    return albumid;
+}
+
+- (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
+    NSString *albumid = [self createNewAlbum];
+    _uploaded = 0;
+    _totalToUpload = 0;
+    NSLog(@"Start Uploading");
     [self uploadPhotosInBackground:assets albumid:albumid];
-    
-    
-    
 }
 
 - (void)UzysAssetsPickerControllerDidCancel:(UzysAssetsPickerController *)picker{
@@ -74,13 +84,23 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    
+    [PFQuery clearAllCachedResults];
 }
 
 
 - (IBAction)choosePhotosTapped:(id)sender {
     [self presentMediaPicker];
 }
+
+- (void)uploadAlbumMetadata {
+    UIBackgroundTaskIdentifier taskId = [self generateTaskId];
+    [self uploadObject:taskId pfObject:newAlbum numOfRetiresLeft:3];
+}
+
+- (IBAction)saveAlbum:(id)sender {
+    [self uploadAlbumMetadata];
+}
+
 
 - (NSString *)generateAlbumId {
     NSString *albumid = [[NSUUID UUID] UUIDString];
@@ -93,6 +113,7 @@
     [photoObject setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
     [photoObject setObject:[[PFUser currentUser] username] forKey:@"owner"];
     [photoObject setObject:albumid forKey:@"albumId"];
+//    [photoObject setObject:0 forKey:@"numOfLikes"];
     return photoObject;
 }
 
@@ -114,17 +135,23 @@
     return taskId;
 }
 
-- (void)uploadPhoto:(UIBackgroundTaskIdentifier)taskId
-        photoObject:(PFObject *)photoObject
+- (void)uploadObject:(UIBackgroundTaskIdentifier)taskId
+        pfObject:(PFObject *)photoObject
    numOfRetiresLeft:(int)retries{
     
-
-    
+    @synchronized(self){
+        _totalToUpload=_totalToUpload+1;
+       
+    }
     [photoObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error){
+            @synchronized(self){
+                _totalToUpload=_totalToUpload-1;
+                
+            }
             if (retries>0) {
-                NSLog(@"upload filed. retrying %i more times",retries);
-                [self uploadPhoto:taskId photoObject:photoObject numOfRetiresLeft:retries-1];
+                NSLog(@"%@ upload failed. retrying %i more times",photoObject.parseClassName, retries);
+                [self uploadObject:taskId pfObject:photoObject numOfRetiresLeft:retries-1];
             }
             else{
                 UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Image Upload Error" message:@"please try sending your image again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -136,7 +163,11 @@
         else if (succeeded){
             @synchronized(self){
                 _uploaded=_uploaded+1;
-                NSLog(@"%i",_uploaded);
+                if (_totalToUpload!=0) {
+                    double percent = (_uploaded/_totalToUpload)*100;
+                NSLog(@"%i%%",(int)percent);
+                }
+
             }
             [[UIApplication sharedApplication] endBackgroundTask:taskId];
             
@@ -146,15 +177,32 @@
 
 - (void)uploadImagesTo:(NSString *)albumid
        withPhotoAssets:(NSArray *)assets {
-    
+//    NSMutableArray* photosArray = [[NSMutableArray alloc]initWithCapacity:MAXIMUM_PHOTOS_IN_ALBUM];
     [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+
         PFFile *imageFile = [self buildFile:obj idx:idx albumid:albumid];
+        
+        if (idx==0) [self setCoverPhoto:imageFile];
+        
         PFObject *photoObject = [self buildPhotoObject:imageFile albumid:albumid];
         UIBackgroundTaskIdentifier taskId = [self generateTaskId];
-        [self uploadPhoto:taskId photoObject:photoObject numOfRetiresLeft:3];
+        [self uploadObject:taskId pfObject:photoObject numOfRetiresLeft:3];
+//        [photosArray addObject:photoObject];
     }];
+
+    
+//    [PFObject saveAllInBackground:photosArray chunkSize:1 block:^(BOOL succeeded, NSError *error) {
+//        //code
+//    } progressBlock:^(int percentDone) {
+//        NSLog(@"%i/100",percentDone);
+//    }];
+
+
 }
 
+- (void)setCoverPhoto:(PFFile*)coverPhotoFile{
+    [newAlbum setObject:coverPhotoFile forKey:@"coverPhoto"];
+}
 - (void)uploadPhotosInBackground:(NSArray *)assets
                          albumid:(NSString *)albumid {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -165,5 +213,30 @@
         });
     });
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+// It is important for you to hide kwyboard
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    NSString *trimmedAlbumName = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    if ([trimmedAlbumName isEqualToString:@""]) {
+        NSLog(@"Empty album name!");
+            return NO;
+    }
+    else
+    {
+        [newAlbum setObject:trimmedAlbumName forKey:@"albumTitle"];
+        return YES;
+    }
+
+}
+
 
 @end
