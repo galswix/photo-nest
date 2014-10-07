@@ -41,6 +41,7 @@
 @end
 
 @implementation UzysAssetsPickerController
+@synthesize purposeForPicker;
 
 #pragma mark - ALAssetsLibrary
 

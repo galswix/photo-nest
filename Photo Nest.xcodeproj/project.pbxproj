@@ -31,6 +31,7 @@
 		2309C34919DF8A60009FDA92 /* CreateAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309C34819DF8A60009FDA92 /* CreateAlbumViewController.m */; };
 		231C1A3919E320D600352CBD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231C1A3819E320D600352CBD /* Parse.framework */; };
 		231C1A3C19E321F500352CBD /* Parser+MultiProgression.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C1A3B19E321F500352CBD /* Parser+MultiProgression.m */; };
+		2340789019E47AC40061BA7D /* MYCancellationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2340788F19E47AC40061BA7D /* MYCancellationToken.m */; };
 		23AE342C19DF40CF00342EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AE342B19DF40CF00342EFF /* main.m */; };
 		23AE342F19DF40CF00342EFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AE342E19DF40CF00342EFF /* AppDelegate.m */; };
 		23AE343519DF40CF00342EFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23AE343319DF40CF00342EFF /* Main.storyboard */; };
@@ -86,6 +87,8 @@
 		231C1A3819E320D600352CBD /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../Downloads/parse-library-1.4.1/Parse.framework"; sourceTree = "<group>"; };
 		231C1A3A19E321F500352CBD /* Parser+MultiProgression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parser+MultiProgression.h"; sourceTree = "<group>"; };
 		231C1A3B19E321F500352CBD /* Parser+MultiProgression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parser+MultiProgression.m"; sourceTree = "<group>"; };
+		2340788E19E47AC40061BA7D /* MYCancellationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYCancellationToken.h; sourceTree = "<group>"; };
+		2340788F19E47AC40061BA7D /* MYCancellationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYCancellationToken.m; sourceTree = "<group>"; };
 		23AE342619DF40CF00342EFF /* Photo Nest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Nest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23AE342A19DF40CF00342EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23AE342B19DF40CF00342EFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -174,6 +177,8 @@
 				2309C2F619DF4D3E009FDA92 /* MyAlbumsViewController.m */,
 				2309C34719DF8A60009FDA92 /* CreateAlbumViewController.h */,
 				2309C34819DF8A60009FDA92 /* CreateAlbumViewController.m */,
+				2340788E19E47AC40061BA7D /* MYCancellationToken.h */,
+				2340788F19E47AC40061BA7D /* MYCancellationToken.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				2309C34919DF8A60009FDA92 /* CreateAlbumViewController.m in Sources */,
 				2309C34619DF87F8009FDA92 /* UzysWrapperPickerController.m in Sources */,
 				231C1A3C19E321F500352CBD /* Parser+MultiProgression.m in Sources */,
+				2340789019E47AC40061BA7D /* MYCancellationToken.m in Sources */,
 				2309C34119DF87F8009FDA92 /* UzysAssetsPickerController.m in Sources */,
 				23AE342F19DF40CF00342EFF /* AppDelegate.m in Sources */,
 				2309C33F19DF87F8009FDA92 /* UzysAppearanceConfig.m in Sources */,

@@ -20,7 +20,11 @@
 
 @property (readwrite, atomic) volatile double uploaded;
 @property (readwrite, atomic) volatile double totalToUpload;
+
 - (IBAction)choosePhotosTapped:(id)sender;
 - (IBAction)saveAlbum:(id)sender;
+- (IBAction)chooseCoverTapped:(id)sender;
+- (IBAction)shareWithFriendsTapped:(id)sender;
+- (IBAction)cancelAlbumCreation:(id)sender;
 
 @end

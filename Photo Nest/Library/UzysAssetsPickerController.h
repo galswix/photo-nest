@@ -22,6 +22,7 @@
 @property (nonatomic, strong) ALAssetsFilter *assetsFilter;
 @property (nonatomic, assign) NSInteger maximumNumberOfSelectionVideo;
 @property (nonatomic, assign) NSInteger maximumNumberOfSelectionPhoto;
+@property (nonatomic,assign)   int purposeForPicker;
 //--------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger maximumNumberOfSelectionMedia;
 
