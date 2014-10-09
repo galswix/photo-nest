@@ -8,23 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-#import "Parser+MultiProgression.h"
+
 
 
 @interface CreateAlbumViewController : UIViewController<UITextFieldDelegate>
 {
 //    int uploaded;
     int total;
-    PFObject* newAlbum;
+//    PFObject* newAlbum;
 }
 
 @property (readwrite, atomic) volatile double uploaded;
 @property (readwrite, atomic) volatile double totalToUpload;
 
 - (IBAction)choosePhotosTapped:(id)sender;
-- (IBAction)saveAlbum:(id)sender;
+- (IBAction)saveAlbumTapped:(id)sender;
 - (IBAction)chooseCoverTapped:(id)sender;
 - (IBAction)shareWithFriendsTapped:(id)sender;
-- (IBAction)cancelAlbumCreation:(id)sender;
+- (IBAction)cancelAlbumCreationTapped:(id)sender;
 
 @end

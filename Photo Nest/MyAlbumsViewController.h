@@ -10,6 +10,7 @@
 #import "UzysAssetsPickerController.h"
 
 @interface MyAlbumsViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *profileImg;
 
-- (IBAction)addNewAlbumTapped:(id)sender;
+
 @end

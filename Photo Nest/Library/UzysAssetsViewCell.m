@@ -151,8 +151,8 @@ static UIColor *selectedColor;
     NSDate *dateNow = [[NSDate alloc] initWithTimeInterval:timeInterval sinceDate:dateRef];
     
     unsigned int uFlags =
-    NSSecondCalendarUnit | NSMinuteCalendarUnit | NSHourCalendarUnit |
-    NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit;
+    NSCalendarUnitSecond | NSCalendarUnitMinute | NSCalendarUnitHour |
+    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
 
     
     NSDateComponents *components = [calendar components:uFlags
